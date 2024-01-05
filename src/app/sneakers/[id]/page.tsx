@@ -8,11 +8,18 @@ import { Card } from '@/components/ui/card';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Sneakers } from '@/lib/types';
 import { cn } from '@/lib/utils';
-import { ChevronLeft, Heart } from 'lucide-react';
+import {
+  BadgeAlert,
+  BadgeCheck,
+  BadgeX,
+  ChevronLeft,
+  Heart,
+} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 const SizeToggleGroup = ({
   value,
@@ -62,6 +69,7 @@ const DetailCard = ({
   sneakers: Sneakers;
 }) => {
   const cart = useCart();
+  const router = useRouter();
   const itemFromCart = cart.items.find((item) => item.id === id);
   const [size, setSize] = useState<number | null>(itemFromCart?.size ?? null);
   const [missingSize, setMissingSize] = useState<boolean>(false);
@@ -70,17 +78,30 @@ const DetailCard = ({
   function handleAddToCart(id: number) {
     if (!size) {
       setMissingSize(true);
+      toast.warning('Choose size before add to cart.', {
+        icon: <BadgeAlert className="size-5 text-orange-500" />,
+      });
       return;
     }
 
     setMissingSize(false);
     cart.addItem({ id, size });
+    toast.success('Added to cart.', {
+      icon: <BadgeCheck className="size-5 text-green-500" />,
+      action: {
+        label: 'Open Cart →',
+        onClick: () => router.push('/cart'),
+      },
+    });
   }
 
   function handleRemoveFromCart(id: number) {
     setMissingSize(false);
     setSize(null);
     cart.removeItem(id);
+    toast.error('Removed from cart.', {
+      icon: <BadgeX className="size-5 text-destructive" />,
+    });
   }
 
   return (

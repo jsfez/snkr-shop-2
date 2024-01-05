@@ -1,16 +1,7 @@
 'use client';
 
-import { CartItem } from '@/lib/types';
+import { CartItem, CartState } from '@/lib/types';
 import React, { createContext, useContext, useMemo, useState } from 'react';
-
-type CartState = {
-  items: CartItem[];
-  empty: boolean;
-  itemCount: number;
-  addItem: (item: CartItem) => void;
-  removeItem: (id: number) => void;
-  checkout: () => void;
-};
 
 const initialCartState: CartState = {
   empty: true,

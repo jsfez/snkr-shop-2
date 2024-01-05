@@ -6,3 +6,12 @@ export type CartItem = {
   id: number;
   size: number;
 };
+
+export type CartState = {
+  items: CartItem[];
+  empty: boolean;
+  itemCount: number;
+  addItem: (item: CartItem) => void;
+  removeItem: (id: number) => void;
+  checkout: () => void;
+};

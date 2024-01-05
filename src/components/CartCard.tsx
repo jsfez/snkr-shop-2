@@ -2,6 +2,7 @@ import products from '@/assets/data.json';
 import { CartItem } from '@/lib/types';
 import { Trash, Trash2 } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { Button } from './ui/button';
 import { Card } from './ui/card';
@@ -25,8 +26,9 @@ export const CartCard = ({
         width={150}
         height={150}
       />
-
-      <div className="mb-2 font-semibold">{product.name}</div>
+      <Link href={`/sneakers/${item.id}`} className="hover:underline">
+        <div className="mb-2 font-semibold">{product.name}</div>
+      </Link>
       <div className="line-clamp-3 text-sm">{product.story_html}</div>
       <div className="mr-4 mt-6 flex items-center justify-between gap-6">
         <div className="text-lg font-semibold">Size: {item.size}</div>
