@@ -17,7 +17,7 @@ const NavItem = ({ className, $active, ...props }: NavItemProps) => {
   return (
     <Link
       className={cn(
-        'transition-colors hover:text-foreground/80 font-medium',
+        'font-medium transition-colors hover:text-foreground/80',
         $active ? 'text-foreground' : 'text-foreground/60',
         className,
       )}
@@ -30,8 +30,8 @@ export const MainNav = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="h-10 flex justify-between items-center gap-10 max-w-full overflow-auto">
-      <Link href="/" className="flex items-center shrink-0">
+    <nav className="flex h-10 max-w-full items-center justify-between gap-10 overflow-auto">
+      <Link href="/" className="flex shrink-0 items-center">
         <Image
           src="/images/logo.png"
           alt="snkr-shop-logo"
@@ -40,7 +40,7 @@ export const MainNav = () => {
         />
         <div className="ml-2 text-center">
           <span className="text-2xl font-[1000]">SNKR.</span>
-          <span className="font-extrabold text-sm">shop</span>
+          <span className="text-sm font-extrabold">shop</span>
         </div>
       </Link>
 
@@ -49,9 +49,9 @@ export const MainNav = () => {
           Home
         </NavItem>
         <NavItem href="/sneakers" $active={pathname === '/sneakers'}>
-          Catalog
+          Sneakers
         </NavItem>
-        <NavItem href="/about" $active={pathname?.startsWith('/cart')}>
+        <NavItem href="/cart" $active={pathname?.startsWith('/cart')}>
           <ShoppingCart />
         </NavItem>
       </div>

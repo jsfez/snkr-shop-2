@@ -3,6 +3,7 @@ import { Inter as FontSans } from 'next/font/google';
 
 import './globals.css';
 
+import { CartProvider } from '@/components/CartContext';
 import { MainNav } from '@/components/MainNav';
 import { cn } from '@/lib/utils';
 
@@ -25,12 +26,14 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          'min-h-screen bg-background font-sans antialiased flex flex-col px-6 w-full mx-auto',
+          'mx-auto flex min-h-screen w-full flex-col bg-background px-6 font-sans antialiased',
           fontSans.variable,
         )}
       >
-        <MainNav />
-        <div>{children}</div>
+        <CartProvider>
+          <MainNav />
+          <div>{children}</div>
+        </CartProvider>
       </body>
     </html>
   );

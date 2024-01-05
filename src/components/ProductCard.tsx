@@ -17,7 +17,7 @@ export const ProductCard = ({
   original_picture_url: string;
 }) => (
   <Link href={`/sneakers/${id}`}>
-    <Card className="w-72 hover:shadow-2xl bg-transparent shadow-sm border border-slate-100 outline outline-slate-100 rounded-2xl">
+    <Card className="w-72 bg-background hover:shadow-2xl">
       <Image
         src={img}
         alt={nickname}
@@ -26,15 +26,15 @@ export const ProductCard = ({
         className="mx-auto"
       />
       <CardContent>
-        <h3 className="text-lg text-mono font-semibold tracking-tight truncate">
+        <h3 className="text-mono truncate text-lg font-semibold tracking-tight">
           {nickname}
         </h3>
-        <p className="leading-6 mt-1 line-clamp-4 text-ellipsis overflow-hidden">
+        <p className="mt-1 line-clamp-4 overflow-hidden text-ellipsis leading-6">
           {description}
         </p>
       </CardContent>
       <CardFooter>
-        <div className="flex items-center justify-between w-full">
+        <div className="flex w-full items-center justify-between">
           <Button size="sm">Add to Cart</Button>
           <div className="text-xl font-semibold">${price}</div>
         </div>
