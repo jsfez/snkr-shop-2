@@ -1,26 +1,24 @@
 'use client';
 
+import { CartItem } from '@/lib/types';
 import React, { createContext, useContext, useMemo, useState } from 'react';
-
-type CartItem = {
-  id: number;
-  size: number;
-};
 
 type CartState = {
   items: CartItem[];
-  filled: boolean;
+  empty: boolean;
   itemCount: number;
   addItem: (item: CartItem) => void;
   removeItem: (id: number) => void;
+  checkout: () => void;
 };
 
 const initialCartState: CartState = {
-  filled: false,
+  empty: true,
   itemCount: 0,
   items: [],
   addItem: () => {},
   removeItem: () => {},
+  checkout: () => {},
 };
 
 const CartContext = createContext<CartState>(initialCartState);
@@ -37,7 +35,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
           ...prevState,
           items: [...prevState.items, item],
           itemCount: prevState.itemCount + 1,
-          filled: true,
+          empty: false,
         }));
       },
 
@@ -48,9 +46,18 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
             ...prevState,
             items: newItems,
             itemCount: prevState.itemCount - 1,
-            filled: newItems.length > 0,
+            empty: newItems.length === 0,
           };
         });
+      },
+
+      checkout: () => {
+        setState((prevState) => ({
+          ...prevState,
+          items: [],
+          itemCount: 0,
+          empty: true,
+        }));
       },
     };
   }, [state]);

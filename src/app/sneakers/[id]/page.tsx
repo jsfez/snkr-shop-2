@@ -8,10 +8,45 @@ import { Card } from '@/components/ui/card';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Sneakers } from '@/lib/types';
 import { cn } from '@/lib/utils';
-import { Heart } from 'lucide-react';
+import { ChevronLeft, Heart } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
+
+const SizeToggleGroup = ({
+  value,
+  onValueChange,
+  disabled = false,
+  disabledSizes = [],
+}: {
+  value: string;
+  onValueChange: (value: string) => void;
+  disabled?: boolean;
+  disabledSizes: number[];
+}) => (
+  <ToggleGroup
+    type="single"
+    variant="outline"
+    className="flex-wrap justify-start"
+    value={value}
+    onValueChange={onValueChange}
+  >
+    {Array.from({ length: 8 }, (_, i) => {
+      const size = 5 + i;
+      return (
+        <ToggleGroupItem
+          value={String(size)}
+          key={size}
+          disabled={disabled || disabledSizes.includes(size)}
+          className="h-10 w-10"
+        >
+          {size}
+        </ToggleGroupItem>
+      );
+    })}
+  </ToggleGroup>
+);
 
 const DetailCard = ({
   sneakers: {
@@ -28,11 +63,9 @@ const DetailCard = ({
 }) => {
   const cart = useCart();
   const itemFromCart = cart.items.find((item) => item.id === id);
-  const [size, setSize] = useState<number | null>(null);
+  const [size, setSize] = useState<number | null>(itemFromCart?.size ?? null);
   const [missingSize, setMissingSize] = useState<boolean>(false);
   const gender = genders?.[0];
-
-  console.log(cart.items);
 
   function handleAddToCart(id: number) {
     if (!size) {
@@ -52,7 +85,12 @@ const DetailCard = ({
 
   return (
     <Main>
-      <Card className="mx-auto w-3/4 shadow-xl md:max-w-4xl">
+      <Card className="relative mx-auto w-3/4 shadow-xl md:max-w-4xl">
+        <Button className="absolute left-0 top-2" variant="link" asChild>
+          <Link href="/sneakers">
+            <ChevronLeft className="size-4" /> Return
+          </Link>
+        </Button>
         <div className="flex flex-col gap-6 px-5 py-10 md:flex-row">
           <div className="flex flex-1 flex-col justify-between">
             <Image
@@ -62,7 +100,6 @@ const DetailCard = ({
               alt="sneakers-preview"
               className="mx-auto object-cover"
             />
-
             <div>
               <div
                 className={cn(
@@ -72,64 +109,47 @@ const DetailCard = ({
               >
                 CHOOSE SIZE
               </div>
-              <ToggleGroup
-                type="single"
-                variant="outline"
-                className="flex-wrap justify-start"
-              >
-                {Array.from({ length: 8 }, (_, i) => {
-                  const value = 5 + i;
-                  return (
-                    <ToggleGroupItem
-                      value={`size-${value}`}
-                      key={value}
-                      disabled={
-                        Boolean(itemFromCart) || [6, 8, 9].includes(value)
-                      }
-                      className="h-10 w-10"
-                      onClick={() => {
-                        setMissingSize(false);
-                        setSize(value);
-                      }}
-                    >
-                      {value}
-                    </ToggleGroupItem>
-                  );
-                })}
-              </ToggleGroup>
+              <SizeToggleGroup
+                value={String(size ?? '')}
+                onValueChange={(value) => setSize(Number(value))}
+                disabledSizes={[6, 8, 9]}
+                disabled={Boolean(itemFromCart)}
+              />
             </div>
           </div>
 
-          <div className="flex-1">
+          <div className="flex flex-1 flex-col">
             <div className="text-sm uppercase text-muted-foreground">
               {gender}&apos;s {brand}
             </div>
             <h1 className="text-2xl font-semibold uppercase">{name}</h1>
-            <h3 className="mb-7 text-2xl font-semibold">${price}</h3>
-            <small className="text-sm text-black">{description}</small>
+            <div className="mt-7 flex-1 text-sm text-black">{description}</div>
 
-            <div className="mt-14 flex gap-1">
-              <Button size="icon" className="h-11">
-                <Heart />
-              </Button>
-              {itemFromCart ? (
-                <Button
-                  size="lg"
-                  className="uppercase"
-                  variant="destructive"
-                  onClick={() => handleRemoveFromCart(id)}
-                >
-                  remove item
+            <div className="mt-8 flex items-center justify-between gap-3">
+              <div className="flex gap-1">
+                {itemFromCart ? (
+                  <Button
+                    size="lg"
+                    className="uppercase"
+                    variant="destructive"
+                    onClick={() => handleRemoveFromCart(id)}
+                  >
+                    remove item
+                  </Button>
+                ) : (
+                  <Button
+                    size="lg"
+                    className="uppercase"
+                    onClick={() => handleAddToCart(id)}
+                  >
+                    add to cart
+                  </Button>
+                )}
+                <Button size="icon" className="h-11">
+                  <Heart />
                 </Button>
-              ) : (
-                <Button
-                  size="lg"
-                  className="uppercase"
-                  onClick={() => handleAddToCart(id)}
-                >
-                  add to cart
-                </Button>
-              )}
+              </div>
+              <div className="text-2xl font-semibold">${price}</div>
             </div>
           </div>
         </div>

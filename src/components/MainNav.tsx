@@ -7,6 +7,8 @@ import Link, { LinkProps } from 'next/link';
 import { usePathname } from 'next/navigation';
 import * as React from 'react';
 
+import { useCart } from './CartContext';
+
 type NavItemProps = LinkProps & {
   children: React.ReactNode;
   $active?: boolean;
@@ -17,7 +19,7 @@ const NavItem = ({ className, $active, ...props }: NavItemProps) => {
   return (
     <Link
       className={cn(
-        'font-medium transition-colors hover:text-foreground/80',
+        'relative font-medium transition-colors hover:text-foreground/80',
         $active ? 'text-foreground' : 'text-foreground/60',
         className,
       )}
@@ -28,9 +30,10 @@ const NavItem = ({ className, $active, ...props }: NavItemProps) => {
 
 export const MainNav = () => {
   const pathname = usePathname();
+  const cart = useCart();
 
   return (
-    <nav className="flex h-10 max-w-full items-center justify-between gap-10 overflow-auto">
+    <nav className="flex h-14 max-w-full items-center justify-between gap-10 overflow-auto pr-2">
       <Link href="/" className="flex shrink-0 items-center">
         <Image
           src="/images/logo.png"
@@ -53,6 +56,9 @@ export const MainNav = () => {
         </NavItem>
         <NavItem href="/cart" $active={pathname?.startsWith('/cart')}>
           <ShoppingCart />
+          <div className="absolute -right-2 -top-2 flex size-5 items-center justify-center rounded-full bg-slate-500 text-xs font-bold text-white">
+            {cart.itemCount}
+          </div>
         </NavItem>
       </div>
     </nav>
