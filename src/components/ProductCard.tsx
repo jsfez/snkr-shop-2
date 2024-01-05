@@ -23,40 +23,30 @@ export const ProductCard = ({
   const itemFromCart = cart.items.find((item) => item.id === id);
 
   return (
-    <Link href={`/sneakers/${id}`}>
-      <Card className="w-72 bg-background hover:shadow-2xl">
-        <Image
-          src={img}
-          alt={nickname}
-          width={200}
-          height={200}
-          className="mx-auto"
-        />
-        <CardContent>
-          <h3 className="text-mono truncate text-lg font-semibold tracking-tight">
-            {nickname}
-          </h3>
-          <p className="mt-1 line-clamp-4 overflow-hidden text-ellipsis leading-6">
-            {description}
-          </p>
-        </CardContent>
-        <CardFooter>
-          <div className="flex w-full items-center justify-between">
-            {itemFromCart ? (
-              <Button
-                size="sm"
-                variant="destructive"
-                onClick={() => cart.removeItem(id)}
-              >
-                Remove item
-              </Button>
-            ) : (
-              <Button size="sm">Preview</Button>
-            )}
-            <div className="text-xl font-semibold">${price}</div>
-          </div>
-        </CardFooter>
-      </Card>
-    </Link>
+    <Card className="w-72 bg-background hover:shadow-2xl">
+      <Image
+        src={img}
+        alt={nickname}
+        width={200}
+        height={200}
+        className="mx-auto"
+      />
+      <CardContent>
+        <h3 className="text-mono truncate text-lg font-semibold tracking-tight">
+          {nickname}
+        </h3>
+        <p className="mt-1 line-clamp-4 overflow-hidden text-ellipsis leading-6">
+          {description}
+        </p>
+      </CardContent>
+      <CardFooter>
+        <div className="flex w-full items-center justify-between">
+          <Link href={`/sneakers/${id}`}>
+            <Button size="sm">Preview</Button>
+          </Link>
+          <div className="text-xl font-semibold">${price}</div>
+        </div>
+      </CardFooter>
+    </Card>
   );
 };

@@ -23,7 +23,7 @@ export default function Home() {
       </Link>
 
       <Button asChild>
-        <Link href="/sneakers">Explore Now</Link>
+        <Link href="/sneakers">Shop Now</Link>
       </Button>
     </div>
   );

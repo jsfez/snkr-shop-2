@@ -8,7 +8,7 @@ const pages = [
   { name: 'cart', path: '/cart' },
 ];
 
-http: test('screenshot pages', async ({ page }) => {
+test('screenshot pages', async ({ page }) => {
   for (const { name, path } of pages) {
     await page.goto(path);
     await page.waitForTimeout(3000);
