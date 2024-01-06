@@ -1,16 +1,8 @@
-import { expect, test } from '@playwright/test';
+import { test } from '@playwright/test';
 
 test('Add to cart', async ({ page }) => {
   // Go to product list
-  await page.goto('/sneakers');
-
-  // Go to product page
-  await page
-    .locator('div', { hasText: 'Crimson Tint' })
-    .filter({ has: page.getByRole('button') })
-    .last()
-    .getByRole('button', { name: 'Preview' })
-    .click({ timeout: 300 });
+  await page.goto('/sneakers/485842');
 
   // Add to cart
   await page.getByRole('radio', { name: '12' }).click();
