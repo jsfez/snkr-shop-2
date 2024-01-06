@@ -5,7 +5,12 @@ test('Add to cart', async ({ page }) => {
   await page.goto('/sneakers');
 
   // Go to product page
-  await page.locator('button:near(:text("Crimson Tint"))').click();
+  await page
+    .locator('div', { hasText: 'Crimson Tint' })
+    .filter({ has: page.getByRole('button') })
+    .last()
+    .getByRole('button', { name: 'Preview' })
+    .click({ timeout: 300 });
 
   // Add to cart
   await page.getByRole('radio', { name: '12' }).click();
