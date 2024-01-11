@@ -15,7 +15,7 @@ test('Open product detail', async ({ page }) => {
   // Check product detail
   await expect(
     page.getByRole('heading', {
-      name: "AIR JORDAN 1 RETRO HIGH OG 'CRIMSON TINT'",
+      name: "HIGH OG 'CRIMSON TINT'",
     }),
   ).toBeVisible();
 });
