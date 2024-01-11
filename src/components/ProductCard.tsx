@@ -6,18 +6,24 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export const ProductCard = ({
-  id,
-  nickname,
-  story_html: description,
-  price,
-  original_picture_url: img,
-}: {
+export type ProductCardProps = {
   id: number;
   nickname: string;
   story_html: string;
   price: number;
   original_picture_url: string;
+};
+
+export const ProductCard = ({
+  product: {
+    id,
+    nickname,
+    story_html: description,
+    price,
+    original_picture_url: img,
+  },
+}: {
+  product: ProductCardProps;
 }) => {
   const cart = useCart();
   const itemFromCart = cart.items.find((item) => item.id === id);
