@@ -6,14 +6,13 @@ test('Add to cart', async ({ page }) => {
   await page.getByRole('button', { name: 'ADD TO CART' }).click();
   const toast = page.getByRole('status');
   await expect(toast).toContainText('Added to cart.');
-});
 
-test('Cart is filled', async ({ page }) => {
   await page.getByRole('link', { name: 'Cart' }).click();
   await page.waitForURL('/cart');
 
-  const cartItem = page.getByRole('heading', { name: 'Crimson Tint' });
-  await expect(cartItem).toBeVisible();
-  await expect(page.getByText('Size: 12')).toBeVisible();
+  const cartItem = page.getByRole('listitem');
+  await expect(cartItem).toContainText('The Air Jordan 1 Retro High');
+  await expect(cartItem).toContainText('Size: 12');
+  await expect(cartItem).toContainText('$180');
   await expect(page.getByText('TOTAL PRICE : $180')).toBeVisible();
 });

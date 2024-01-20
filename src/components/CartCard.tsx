@@ -19,7 +19,7 @@ export const CartCard = ({
   if (!product) return null;
 
   return (
-    <Card key={item.id} className="bg-slate-100 p-4">
+    <Card key={item.id} className="bg-slate-100 p-4" role="listitem">
       <Image
         src={product.original_picture_url}
         alt={product.name}
@@ -27,8 +27,14 @@ export const CartCard = ({
         height={150}
       />
       <h4 className="mb-2 font-semibold">{product.name}</h4>
-      <div className="line-clamp-3 text-sm">{product.story_html}</div>
-      <div className="mr-4 mt-6 flex items-center justify-between gap-6">
+      <div className="relative line-clamp-3 items-end text-sm">
+        {product.story_html.slice(0, 234)}&hellip;
+        <span className="absolute right-0 whitespace-nowrap font-semibold text-muted-foreground transition hover:text-secondary-foreground">
+          <Link href={`/sneakers/${product.slug}`}>See more</Link>
+        </span>
+      </div>
+
+      <div className="mt-6 flex items-center justify-between gap-6">
         <div className="text-lg font-semibold">Size: {item.size}</div>
         <div className="flex items-center gap-4">
           <div className="text-lg font-semibold">${product.price}</div>
