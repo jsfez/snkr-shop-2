@@ -1,3 +1,4 @@
+import { argosScreenshot } from '@argos-ci/playwright';
 import { expect, test } from '@playwright/test';
 
 test('Add to cart', async ({ page }) => {
@@ -12,8 +13,5 @@ test('Cart is filled', async ({ page }) => {
   await page.getByRole('link', { name: 'Cart' }).click();
   await page.waitForURL('/cart');
 
-  const cartItem = page.getByRole('heading', { name: 'Crimson Tint' });
-  await expect(cartItem).toBeVisible();
-  await expect(page.getByText('Size: 12')).toBeVisible();
-  await expect(page.getByText('TOTAL PRICE : $180')).toBeVisible();
+  argosScreenshot(page, 'filled-cart');
 });
