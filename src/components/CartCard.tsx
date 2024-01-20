@@ -28,10 +28,7 @@ export const CartCard = ({
       />
       <h4 className="mb-2 font-semibold">{product.name}</h4>
       <div className="relative line-clamp-3 items-end text-sm">
-        {product.story_html.slice(0, 234)}&hellip;
-        <span className="absolute right-0 whitespace-nowrap font-semibold text-muted-foreground transition hover:text-secondary-foreground">
-          <Link href={`/sneakers/${product.slug}`}>See more</Link>
-        </span>
+        {product.story_html}
       </div>
 
       <div className="mt-6 flex items-center justify-between gap-6">
