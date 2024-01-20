@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test.skip('Cart is filled', async ({ page }) => {
+test('Cart is filled', async ({ page }) => {
   await page.goto('/cart');
   const cartItem = page.getByRole('listitem');
   await expect(cartItem).toContainText('The Air Jordan 1 Retro High');
