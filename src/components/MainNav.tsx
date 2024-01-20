@@ -54,8 +54,13 @@ export const MainNav = () => {
         <NavItem href="/sneakers" $active={pathname === '/sneakers'}>
           Sneakers
         </NavItem>
-        <NavItem href="/cart" $active={pathname?.startsWith('/cart')}>
+        <NavItem
+          href="/cart"
+          $active={pathname?.startsWith('/cart')}
+          aria-label="cart"
+        >
           <ShoppingCart />
+          <span className="sr-only">Menu</span>
           <div className="absolute -right-2 -top-2 flex size-5 items-center justify-center rounded-full bg-slate-500 text-xs font-bold text-white">
             {cart.itemCount}
           </div>

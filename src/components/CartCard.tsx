@@ -26,9 +26,7 @@ export const CartCard = ({
         width={150}
         height={150}
       />
-      <Link href={`/sneakers/${item.id}`} className="hover:underline">
-        <div className="mb-2 font-semibold">{product.name}</div>
-      </Link>
+      <h4 className="mb-2 font-semibold">{product.name}</h4>
       <div className="line-clamp-3 text-sm">{product.story_html}</div>
       <div className="mr-4 mt-6 flex items-center justify-between gap-6">
         <div className="text-lg font-semibold">Size: {item.size}</div>

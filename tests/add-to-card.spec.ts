@@ -1,19 +1,19 @@
-import { test } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test('Add to cart', async ({ page }) => {
-  // Go to product list
   await page.goto('/sneakers/485842');
-
-  // Add to cart
   await page.getByRole('radio', { name: '12' }).click();
   await page.getByRole('button', { name: 'ADD TO CART' }).click();
-  await page.getByText('Added to cart.');
+  const toast = page.getByRole('status');
+  await expect(toast).toContainText('Added to cart.');
+});
 
-  // Go to cart
-  await page.getByRole('button', { name: 'Open Cart →' });
+test('Cart is filled', async ({ page }) => {
+  await page.getByRole('link', { name: 'Cart' }).click();
+  await page.waitForURL('/cart');
 
-  // Check cart content
-  await page.getByText('Crimson Tint');
-  await page.getByText('Size: 12');
-  await page.getByText('TOTAL PRICE : $180');
+  const cartItem = page.getByRole('heading', { name: 'Crimson Tint' });
+  await expect(cartItem).toBeVisible();
+  await expect(page.getByText('Size: 12')).toBeVisible();
+  await expect(page.getByText('TOTAL PRICE : $180')).toBeVisible();
 });

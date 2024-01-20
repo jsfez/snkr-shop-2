@@ -1,6 +1,5 @@
 'use client';
 
-import products from '@/assets/data.json';
 import { useCart } from '@/components/CartContext';
 import { Main } from '@/components/Main';
 import { Button } from '@/components/ui/button';

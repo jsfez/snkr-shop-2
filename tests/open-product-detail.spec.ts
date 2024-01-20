@@ -1,21 +1,20 @@
 import { expect, test } from '@playwright/test';
 
-test('Open product detail', async ({ page }) => {
-  // Go to product list
+test('open product detail', async ({ page }) => {
+  // Go to sneakers list page
   await page.goto('/sneakers');
 
-  // Go to product page
+  // Click product preview button
   await page
-    .locator('div', { hasText: 'Crimson Tint' })
+    .locator('div')
+    .filter({ hasText: 'Crimson Tint' })
     .filter({ has: page.getByRole('button') })
     .last()
     .getByRole('button', { name: 'Preview' })
     .click();
 
-  // Check product detail
+  // Check the redirection
   await expect(
-    page.getByRole('heading', {
-      name: "HIGH OG 'CRIMSON TINT'",
-    }),
+    page.getByRole('heading', { name: "HIGH OG 'CRIMSON TINT'" }),
   ).toBeVisible();
 });

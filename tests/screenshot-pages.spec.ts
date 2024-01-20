@@ -11,7 +11,6 @@ const pages = [
 test('screenshot pages', async ({ page }) => {
   for (const { name, path } of pages) {
     await page.goto(path);
-    await page.waitForTimeout(3000);
     await argosScreenshot(page, name, { fullPage: true });
   }
 });
