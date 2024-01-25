@@ -11,6 +11,9 @@ const pages = [
 test('screenshot pages', async ({ page }) => {
   for (const { name, path } of pages) {
     await page.goto(path);
-    await argosScreenshot(page, name, { fullPage: true });
+    await argosScreenshot(page, name, {
+      fullPage: true,
+      viewports: ['macbook-13', 'iphone-xr'],
+    });
   }
 });
