@@ -111,65 +111,58 @@ const DetailCard = ({
             <ChevronLeft className="size-4" /> Return
           </Link>
         </Button>
-        <div className="flex flex-col gap-6 px-5 py-10 md:flex-row">
-          <div className="flex flex-1 flex-col justify-between">
-            <Image
-              src={img}
-              width={350}
-              height={350}
-              alt="sneakers-preview"
-              className="mx-auto object-cover"
-            />
-            <div>
-              <div
-                className={cn(
-                  'mb-1 text-sm',
-                  missingSize && 'text-destructive',
-                )}
-              >
-                CHOOSE SIZE
-              </div>
-              <SizeToggleGroup
-                value={String(size ?? '')}
-                onValueChange={(value) => setSize(Number(value))}
-                disabledSizes={[6, 8, 9]}
-                disabled={Boolean(itemFromCart)}
-              />
-            </div>
-          </div>
+        <div className="grid grid-cols-1 gap-x-6 px-5 py-10 md:grid-cols-2">
+          <Image
+            src={img}
+            width={350}
+            height={350}
+            alt="sneakers-preview"
+            className="mx-auto object-cover"
+          />
 
-          <div className="flex flex-1 flex-col">
+          <div>
             <div className="text-sm uppercase text-muted-foreground">
               {gender}&apos;s {brand}
             </div>
-            <h1 className="text-2xl font-semibold uppercase">{name}</h1>
-            <div className="mt-7 flex-1 text-sm text-black">{description}</div>
+            <h1 className="font-semibold uppercase md:text-2xl">{name}</h1>
+            <div className="mt-3 line-clamp-4 flex-1 text-sm text-black md:mt-7 md:line-clamp-none">
+              {description}
+            </div>
+          </div>
 
-            <div className="mt-8 flex items-center justify-between gap-3">
-              <div className="flex gap-1">
-                {itemFromCart ? (
-                  <Button
-                    size="lg"
-                    className="uppercase"
-                    variant="destructive"
-                    onClick={() => handleRemoveFromCart(id)}
-                  >
-                    remove item
-                  </Button>
-                ) : (
-                  <Button
-                    size="lg"
-                    className="uppercase"
-                    onClick={() => handleAddToCart(id)}
-                  >
-                    add to cart
-                  </Button>
-                )}
-                <Button size="icon" className="h-11">
-                  <Heart />
+          <div className="mt-6 md:mt-0">
+            <div
+              className={cn('mb-1 text-sm', missingSize && 'text-destructive')}
+            >
+              CHOOSE SIZE
+            </div>
+            <SizeToggleGroup
+              value={String(size ?? '')}
+              onValueChange={(value) => setSize(Number(value))}
+              disabledSizes={[6, 8, 9]}
+              disabled={Boolean(itemFromCart)}
+            />
+          </div>
+
+          <div className="mt-6 flex flex-wrap-reverse items-start justify-between gap-3 md:mt-0">
+            <div className="flex gap-1">
+              {itemFromCart ? (
+                <Button
+                  size="lg"
+                  variant="destructive"
+                  onClick={() => handleRemoveFromCart(id)}
+                >
+                  REMOVE ITEM
                 </Button>
-              </div>
-              <div className="text-2xl font-semibold">${price}</div>
+              ) : (
+                <Button onClick={() => handleAddToCart(id)}>ADD TO CART</Button>
+              )}
+              <Button size="icon" className="h-11">
+                <Heart />
+              </Button>
+            </div>
+            <div className="pb-1 text-right text-2xl font-semibold">
+              ${price}
             </div>
           </div>
         </div>
