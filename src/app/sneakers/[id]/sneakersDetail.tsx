@@ -105,7 +105,7 @@ const DetailCard = ({
 
   return (
     <Main>
-      <Card className="relative mx-auto w-3/4 shadow-xl md:max-w-4xl">
+      <Card className="relative mx-auto shadow-xl md:w-3/4 md:max-w-4xl">
         <Button className="absolute left-0 top-2" variant="link" asChild>
           <Link href="/sneakers">
             <ChevronLeft className="size-4" /> Return
@@ -117,7 +117,7 @@ const DetailCard = ({
             width={350}
             height={350}
             alt="sneakers-preview"
-            className="mx-auto object-cover"
+            className="-my-8 mx-auto object-cover md:my-0"
           />
 
           <div>
@@ -155,13 +155,15 @@ const DetailCard = ({
                   REMOVE ITEM
                 </Button>
               ) : (
-                <Button onClick={() => handleAddToCart(id)}>ADD TO CART</Button>
+                <Button size="lg" onClick={() => handleAddToCart(id)}>
+                  ADD TO CART
+                </Button>
               )}
               <Button size="icon" className="h-11">
                 <Heart />
               </Button>
             </div>
-            <div className="pb-1 text-right text-2xl font-semibold">
+            <div className="pb-2 text-right text-2xl font-semibold">
               ${price}
             </div>
           </div>
