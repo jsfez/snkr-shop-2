@@ -115,8 +115,8 @@ const DetailCard = ({
           <div className="flex h-[350px] items-center justify-center">
             <Image
               src={img}
-              width={200}
-              height={200}
+              width={350}
+              height={350}
               alt="sneakers-preview"
               className="-my-8 object-cover md:my-0"
             />
