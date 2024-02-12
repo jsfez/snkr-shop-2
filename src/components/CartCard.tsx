@@ -24,8 +24,8 @@ export const CartCard = ({
         <Image
           src={product.original_picture_url}
           alt={product.name}
-          width={120}
-          height={120}
+          width={150}
+          height={150}
         />
       </div>
 
