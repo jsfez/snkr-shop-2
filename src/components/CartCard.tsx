@@ -20,7 +20,7 @@ export const CartCard = ({
 
   return (
     <Card key={item.id} className="bg-slate-100 p-4" role="listitem">
-      <div className="flex h-[150] items-center justify-center">
+      <div className="flex h-[150] items-center">
         <Image
           src={product.original_picture_url}
           alt={product.name}
