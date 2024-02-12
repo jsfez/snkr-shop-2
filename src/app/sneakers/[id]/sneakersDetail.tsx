@@ -112,13 +112,15 @@ const DetailCard = ({
           </Link>
         </Button>
         <div className="grid grid-cols-1 gap-x-6 px-5 py-10 md:grid-cols-2">
-          <Image
-            src={img}
-            width={350}
-            height={350}
-            alt="sneakers-preview"
-            className="-my-8 mx-auto object-cover md:my-0"
-          />
+          <div className="flex h-[350px] items-center justify-center">
+            <Image
+              src={img}
+              width={200}
+              height={200}
+              alt="sneakers-preview"
+              className="-my-8 object-cover md:my-0"
+            />
+          </div>
 
           <div>
             <div className="text-sm uppercase text-muted-foreground">

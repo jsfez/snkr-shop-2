@@ -30,13 +30,9 @@ export const ProductCard = ({
 
   return (
     <Card className="w-72 bg-background hover:shadow-2xl">
-      <Image
-        src={img}
-        alt={nickname}
-        width={200}
-        height={200}
-        className="mx-auto"
-      />
+      <div className="flex h-[200px] items-center justify-center">
+        <Image src={img} alt={nickname} width={150} height={150} />
+      </div>
       <CardContent>
         <h3 className="text-mono truncate text-lg font-semibold tracking-tight">
           {nickname}
