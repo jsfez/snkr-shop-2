@@ -1,6 +1,7 @@
 'use client';
 
 import { useCart } from '@/components/CartContext';
+import { Loader } from '@/components/Loader';
 import { Main } from '@/components/Main';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -14,7 +15,6 @@ import {
   ChevronLeft,
   Heart,
 } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -112,14 +112,15 @@ const DetailCard = ({
           </Link>
         </Button>
         <div className="grid grid-cols-1 gap-x-6 px-5 py-10 md:grid-cols-2">
-          <div className="flex h-[350px] items-center justify-center">
-            <Image
+          <div className="flex items-center justify-center">
+            {/* <Image
               src={img}
               width={200}
               height={200}
               alt="sneakers-preview"
               className="-my-8 object-cover md:my-0"
-            />
+            /> */}
+            <Loader className="size-16" />
           </div>
 
           <div>
@@ -127,12 +128,12 @@ const DetailCard = ({
               {gender}&apos;s {brand}
             </div>
             <h1 className="font-semibold uppercase md:text-2xl">{name}</h1>
-            <div className="mt-3 line-clamp-4 flex-1 text-sm text-black md:mt-7 md:line-clamp-none">
+            <div className="mt-3 line-clamp-4 flex-1 text-sm text-black md:mt-7 md:line-clamp-5">
               {description}
             </div>
           </div>
 
-          <div className="mt-6 md:mt-0">
+          <div className="mt-6 md:mt-3">
             <div
               className={cn('mb-1 text-sm', missingSize && 'text-destructive')}
             >
