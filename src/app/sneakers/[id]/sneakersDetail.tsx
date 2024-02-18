@@ -14,7 +14,6 @@ import {
   ChevronLeft,
   Heart,
 } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -112,14 +111,16 @@ const DetailCard = ({
           </Link>
         </Button>
         <div className="grid grid-cols-1 gap-x-6 px-5 py-10 md:grid-cols-2">
-          <div className="flex h-[220px] items-center justify-center">
-            <Image
-              src={img}
-              width={200}
-              height={200}
-              alt="sneakers-preview"
-              className="-my-8 object-cover md:my-0"
-            />
+          <div className="item flex h-[220px] justify-center pt-[10px]">
+            <div className="relative h-[100px] w-full overflow-hidden">
+              <img
+                src={img}
+                width={200}
+                height={200}
+                alt="sneakers-preview"
+                className="absolute left-1/2 -translate-x-1/2"
+              />
+            </div>
           </div>
 
           <div>
