@@ -105,14 +105,14 @@ const DetailCard = ({
 
   return (
     <Main>
-      <Card className="relative mx-auto shadow-xl md:w-3/4 md:max-w-4xl">
+      <Card className="relative mx-auto shadow-xl">
         <Button className="absolute left-0 top-2" variant="link" asChild>
           <Link href="/sneakers">
             <ChevronLeft className="size-4" /> Return
           </Link>
         </Button>
         <div className="grid grid-cols-1 gap-x-6 px-5 py-10 md:grid-cols-2">
-          <div className="flex h-[350px] items-center justify-center">
+          <div className="flex h-[220px] items-center justify-center">
             <Image
               src={img}
               width={200}
@@ -127,7 +127,7 @@ const DetailCard = ({
               {gender}&apos;s {brand}
             </div>
             <h1 className="font-semibold uppercase md:text-2xl">{name}</h1>
-            <div className="mt-3 line-clamp-4 flex-1 text-sm text-black md:mt-7 md:line-clamp-none">
+            <div className="mt-3 line-clamp-4 flex-1 text-sm text-black md:mt-7 md:line-clamp-4">
               {description}
             </div>
           </div>
