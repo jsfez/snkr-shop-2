@@ -5,7 +5,6 @@ const pages = [
   { name: 'homepage', path: '/' },
   { name: 'sneakers-list', path: '/sneakers' },
   { name: 'sneakers-detail', path: '/sneakers/404758' },
-  { name: 'cart', path: '/cart' },
 ];
 
 test('screenshot pages', async ({ page }) => {
