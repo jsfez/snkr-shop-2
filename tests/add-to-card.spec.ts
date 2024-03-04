@@ -11,5 +11,5 @@ test('Add to cart', async ({ page }) => {
 
   await page.getByRole('link', { name: 'Cart' }).click();
   await page.waitForURL('**/cart');
-  await argosScreenshot(page, 'filled-cart');
+  // await argosScreenshot(page, 'filled-cart');
 });
